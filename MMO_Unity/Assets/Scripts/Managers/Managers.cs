@@ -5,12 +5,23 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     static Managers Instance; // 유일성 보장
-    public static Managers GetInstance() { Init(); return Instance; } // 유일한 매니저를 갖고 옴
+    static Managers GetInstance() { Init(); return Instance; } // 유일한 매니저를 갖고 옴
                                                                       // Init()만 넣어도 됨. init() 함수에서 null인지 체크해주기 때문에
+                                                                      // 외부에서 Instance를 접근하는 것을 원하지 않기 때문에 public X
+    InputManager _input = new InputManager(); // InputManager 추가
+    public static InputManager Input { get { return GetInstance()._input ; } } //  실제로 InputManager을 사용하고 싶으면 Managers.Input을 사용하여 불러오기
+
+
     void Start()
     {
         Init();
     }
+    
+    void Update()
+    {
+        _input.OnUpdate(); // 마우스나 키보드를 체크하던 부분을 Update문을 이 Update문이 대표로 이 매니저스라고 하는 애가 해주는 셈임
+    }
+
     static void Init()
     {
         if (Instance == null)
