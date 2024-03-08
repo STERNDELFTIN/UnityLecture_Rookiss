@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     {
         // Local -> World
         // TransformDirection
+
+        // World -> Local
+        // InverseTransformDirection
         if (Input.GetKey(KeyCode.W))
             transform.position += transform.TransformDirection(Vector3.forward * Time.deltaTime * _speed);
         if (Input.GetKey(KeyCode.S))
@@ -26,5 +29,6 @@ public class PlayerController : MonoBehaviour
             transform.position += transform.TransformDirection(Vector3.right * Time.deltaTime * _speed);
         if (Input.GetKey(KeyCode.A))
             transform.position += transform.TransformDirection(Vector3.left * Time.deltaTime * _speed);
+        // transform.TransformDirection() 대신에 transform.Translate() 사용 가능
     }
 }
